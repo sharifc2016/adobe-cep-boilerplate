@@ -36,3 +36,8 @@
 </DispatchInfoList>
 
 ```
+
+## CSInterface from page 29
+csInterface.openURLInDefaultBrowser("http://www.google.com");
+
+#### CEP Versions 32, 33
