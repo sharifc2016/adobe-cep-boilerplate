@@ -41,3 +41,42 @@
 csInterface.openURLInDefaultBrowser("http://www.google.com");
 
 #### CEP Versions 32, 33
+
+
+## event
+### explain photoshop event
+```
+(function () {
+    var csInterface = new CSInterface();
+    var extensionId = csInterface.getExtensionID();
+ 
+    // callback function 
+    var PhotoshopCallbackUnique = function(evt) {
+        console.log("Fired!", evt);
+    }
+
+    // event listener
+    csInterface.addEventListener("com.adobe.PhotoshopJSONCallback" + extensionId,
+        PhotoshopCallbackUnique);
+    
+    document.getElementById('btn_test').addEventListener('click', function () {
+        console.log("button clicked");
+        
+        // event
+        var event = new CSEvent();
+        // all photoshop
+        event.type = "com.adobe.PhotoshopRegisterEvent";
+        event.scope = "APPLICATION";
+        event.appId = csInterface.getApplicationID();
+        event.extensionId = extensionId;
+
+        // duplicate document event number
+        event.data = "1148218467";
+        
+        // event dispatch
+        csInterface.dispatchEvent(event);
+        console.log("dispatch", event);
+        
+    });
+}());
+```
