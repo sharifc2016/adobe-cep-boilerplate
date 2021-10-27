@@ -1,15 +1,27 @@
 (function () {
-    'use strict';
     var csInterface = new CSInterface();
-    document.getElementById('btn_test').addEventListener('click', function () {
-        // collect data from jsx
-        csInterface.evalScript('collectData()', function (result) {
-            console.log(result);
+    var extensionId = csInterface.getExtensionID();
 
-            var scpt = 'showData("' + result + '")';
-            console.log(scpt);
-            // pass data to jsx
-            csInterface.evalScript(scpt);
-        });
+    // callback function 
+    var CustomCallback = function(evt) {
+        console.log("Fired custom!", evt);
+    }
+    csInterface.addEventListener("com.sharif.boilerplate", CustomCallback);
+
+    document.getElementById('btn_test').addEventListener('click', function () {
+        console.log("button clicked");
+        
+        // event
+        var event = new CSEvent();
+        event.type = "com.sharif.boilerplate";
+        event.scope = "APPLICATION";
+        event.appId = csInterface.getApplicationID();
+        event.extensionId = extensionId;
+        event.data = "1148218467";
+        
+        // event dispatch
+        csInterface.dispatchEvent(event);
+        console.log("dispatch", event);
+        
     });
 }());
