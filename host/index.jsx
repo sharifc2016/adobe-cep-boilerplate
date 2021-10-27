@@ -1,3 +1,7 @@
-function sayHello() {
-    alert("Hello from ExtendScript");
+function collectData() {
+    return 'data from jsx';
+}
+
+function showData(data) {
+    alert(data);
 }
